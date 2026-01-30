@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Para Pyetra 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      text-align: center;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      max-width: 420px;
+    }
+
+    h1 {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 1em;
+      margin-bottom: 20px;
+    }
+
+    .timer {
+      font-size: 1.2em;
+      line-height: 1.8;
+      background: rgba(0,0,0,0.25);
+      padding: 15px;
+      border-radius: 15px;
+      margin-bottom: 15px;
+    }
+
+    .details {
+      font-size: 0.95em;
+      line-height: 1.6;
+      background: rgba(0,0,0,0.15);
+      padding: 12px;
+      border-radius: 12px;
+    }
+
+    .heart {
+      font-size: 2em;
+      margin-top: 15px;
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Para minha irmã Pyetra 💖</h1>
+
+    <p>
+      Desde <strong>04 de maio de 2023</strong>, nossa história vem sendo escrita
+      segundo por segundo.  
+      Esse contador é só um jeitinho simples de mostrar que
+      o nosso tempo juntas nunca para. 🌸
+    </p>
+
+    <!-- Cronômetro principal -->
+    <div class="timer" id="mainTimer">
+      Carregando tempo...
+    </div>
+
+    <!-- Contador detalhado -->
+    <div class="details" id="detailedTimer">
+      Carregando detalhes...
+    </div>
+
+    <div class="heart">💗</div>
+  </div>
+
+  <script>
+    const startDate = new Date("2023-05-04T00:00:00");
+
+    function updateTimers() {
+      const now = new Date();
+
+      // Diferença total em milissegundos
+      const diff = now - startDate;
+
+      // ===== Cronômetro principal =====
+      const totalSeconds = Math.floor(diff / 1000);
+      const totalMinutes = Math.floor(totalSeconds / 60);
+      const totalHours = Math.floor(totalMinutes / 60);
+      const totalDays = Math.floor(totalHours / 24);
+
+      const hours = totalHours % 24;
+      const minutes = totalMinutes % 60;
+      const seconds = totalSeconds % 60;
+
+      document.getElementById("mainTimer").innerHTML = `
+        <strong>${totalDays}</strong> dias<br>
+        <strong>${hours}</strong> horas<br>
+        <strong>${minutes}</strong> minutos<br>
+        <strong>${seconds}</strong> segundos
+      `;
+
+      // ===== Contador detalhado (anos, meses, dias) =====
+      let years = now.getFullYear() - startDate.getFullYear();
+      let months = now.getMonth() - startDate.getMonth();
+      let days = now.getDate() - startDate.getDate();
+
+      if (days < 0) {
+        months--;
+        const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+        days += lastMonth;
+      }
+
+      if (months < 0) {
+        years--;
+        months += 12;
+      }
+
+      document.getElementById("detailedTimer").innerHTML = `
+        <strong>${years}</strong> anos,
+        <strong>${months}</strong> meses,
+        <strong>${days}</strong> dias<br>
+        e <strong>${totalSeconds}</strong> segundos vividos juntas 💕
+      `;
+    }
+
+    setInterval(updateTimers, 1000);
+    updateTimers();
+  </script>
+
+</body>
+</html>
